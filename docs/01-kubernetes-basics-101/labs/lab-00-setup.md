@@ -82,17 +82,23 @@ helm version
 ## Step 5: Start Your Cluster
 
 ```bash
+# Enable rootless mode (required on Fedora - podman refuses root, and sudo needs NOPASSWD)
+minikube config set rootless true
+
 # Start minikube with Podman driver (Fedora-native, no Docker needed)
-minikube start --driver=podman
+minikube start --driver=podman --container-runtime=containerd
 ```
+
+The first run will download ~500MB of images. After that, starts are fast.
 
 You should see something like:
 
 ```
 minikube v1.xx on Fedora xx
 Using the podman driver
-Creating podman container (CPUs=2, Memory=4096MB) ...
-Preparing Kubernetes v1.32.x on containerd ...
+Using rootless Podman driver
+Starting "minikube" primary control-plane node in "minikube" cluster
+Preparing Kubernetes v1.35.x on containerd ...
 Verifying Kubernetes components...
 Enabled addons: default-storageclass, storage-provisioner
 Done! kubectl is now configured to use "minikube" cluster
@@ -102,10 +108,7 @@ Done! kubectl is now configured to use "minikube" cluster
     Try these alternatives in order:
 
     ```bash
-    # Option 1: Run minikube with root podman
-    sudo minikube start --driver=podman
-
-    # Option 2: Use KVM2 driver instead (needs libvirt)
+    # Option 1: Use KVM2 driver instead (needs libvirt)
     sudo dnf install -y @virtualization
     minikube start --driver=kvm2
 

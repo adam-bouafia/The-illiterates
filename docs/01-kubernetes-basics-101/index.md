@@ -46,7 +46,8 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 rm minikube-linux-amd64
 
 # Start your cluster
-minikube start --driver=podman
+minikube config set rootless true
+minikube start --driver=podman --container-runtime=containerd
 
 # Verify
 kubectl cluster-info
