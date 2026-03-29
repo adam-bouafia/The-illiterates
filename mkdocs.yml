@@ -1,0 +1,42 @@
+site_name: "The Illiterates"
+site_description: "Weekly tech study group - learn by doing"
+site_author: "Adam Bouafia & The Illiterates"
+theme:
+  name: readthedocs
+  locale: en
+  highlightjs: true
+  hljs_languages:
+    - yaml
+    - bash
+    - python
+    - dockerfile
+
+nav:
+  - Home: index.md
+  - "Session 1 - Kubernetes Basics 101":
+    - Overview: 01-kubernetes-basics-101/index.md
+    - Theory:
+      - "1. What is Kubernetes?": 01-kubernetes-basics-101/theory/01-what-is-kubernetes.md
+      - "2. Architecture Deep Dive": 01-kubernetes-basics-101/theory/02-architecture.md
+      - "3. Core Objects": 01-kubernetes-basics-101/theory/03-core-objects.md
+      - "4. Networking & Services": 01-kubernetes-basics-101/theory/04-networking.md
+      - "5. Configuration & Secrets": 01-kubernetes-basics-101/theory/05-configuration.md
+      - "6. Storage": 01-kubernetes-basics-101/theory/06-storage.md
+      - "7. Monitoring & Observability": 01-kubernetes-basics-101/theory/07-monitoring.md
+      - "8. Real-World Patterns": 01-kubernetes-basics-101/theory/08-real-world.md
+    - Labs:
+      - "Lab 0: Environment Setup (Fedora)": 01-kubernetes-basics-101/labs/lab-00-setup.md
+      - "Lab 1: Your First Pod": 01-kubernetes-basics-101/labs/lab-01-first-pod.md
+      - "Lab 2: Deployments & Scaling": 01-kubernetes-basics-101/labs/lab-02-deployments.md
+      - "Lab 3: Services & Networking": 01-kubernetes-basics-101/labs/lab-03-services.md
+      - "Lab 4: ConfigMaps & Secrets": 01-kubernetes-basics-101/labs/lab-04-config-secrets.md
+      - "Lab 5: Persistent Storage": 01-kubernetes-basics-101/labs/lab-05-storage.md
+      - "Lab 6: Monitoring with Prometheus & Grafana": 01-kubernetes-basics-101/labs/lab-06-monitoring.md
+      - "Lab 7: Deploy a Full App": 01-kubernetes-basics-101/labs/lab-07-full-app.md
+    - Resources: 01-kubernetes-basics-101/resources.md
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
