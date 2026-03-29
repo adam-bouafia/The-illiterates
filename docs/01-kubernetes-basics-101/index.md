@@ -38,7 +38,7 @@ A weekly study group where we break down real-world tech - no fluff, no slides-o
 
 ```bash
 # Install dependencies (Fedora)
-sudo dnf install -y kubernetes1.32-client podman helm
+sudo dnf install -y kubernetes1.35-client podman helm
 
 # Install minikube (not in Fedora repos)
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64

@@ -16,7 +16,8 @@ Install everything you need to run a local Kubernetes cluster on Fedora Linux.
 sudo dnf search kubernetes | grep client
 
 # Install the latest stable version
-sudo dnf install -y kubernetes1.32-client
+# Pick the latest version from the search results above
+sudo dnf install -y kubernetes1.35-client
 ```
 
 !!! note "Fedora doesn't have a generic `kubectl` package"
