@@ -104,6 +104,18 @@ Enabled addons: default-storageclass, storage-provisioner
 Done! kubectl is now configured to use "minikube" cluster
 ```
 
+## Step 5b: Create a Lab Workspace
+
+All lab exercises use YAML files. Create a folder to keep them organized inside the repo:
+
+```bash
+cd /path/to/The-illiterates
+mkdir -p k8s-labs/29.03.2026
+cd k8s-labs/29.03.2026
+```
+
+All YAML files created during the labs go here. Run all lab commands from this folder.
+
 !!! warning "If podman driver fails"
     Try these alternatives in order:
 

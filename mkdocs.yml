@@ -74,3 +74,5 @@ nav:
       - "Lab 6: Monitoring with Prometheus & Grafana": 01-kubernetes-basics-101/labs/lab-06-monitoring.md
       - "Lab 7: Deploy a Full App": 01-kubernetes-basics-101/labs/lab-07-full-app.md
     - Resources: 01-kubernetes-basics-101/resources.md
+    - Session Notes:
+      - "Week 2 - April 4": 01-kubernetes-basics-101/notes/week2.md
