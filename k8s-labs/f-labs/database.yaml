@@ -1,0 +1,93 @@
+# Secret for DB credentials
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+  namespace: guestbook
+type: Opaque
+data:
+  POSTGRES_USER: Z3Vlc3Rib29r        # guestbook
+  POSTGRES_PASSWORD: V29ya3Nob3AyMDI2  # Workshop2026
+  POSTGRES_DB: Z3Vlc3Rib29r          # guestbook
+
+---
+# Persistent storage for DB
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+  namespace: guestbook
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+# PostgreSQL Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: guestbook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+      tier: database
+  template:
+    metadata:
+      labels:
+        app: postgres
+        tier: database
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16-alpine
+        ports:
+        - containerPort: 5432
+        envFrom:
+        - secretRef:
+            name: postgres-secret
+        volumeMounts:
+        - name: pg-data
+          mountPath: /var/lib/postgresql/data
+          subPath: pgdata
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+        readinessProbe:
+          exec:
+            command: ["pg_isready", "-U", "guestbook"]
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          exec:
+            command: ["pg_isready", "-U", "guestbook"]
+          initialDelaySeconds: 15
+          periodSeconds: 10
+      volumes:
+      - name: pg-data
+        persistentVolumeClaim:
+          claimName: postgres-pvc
+
+---
+# Database Service (ClusterIP - internal only)
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: guestbook
+spec:
+  selector:
+    app: postgres
+    tier: database
+  ports:
+  - port: 5432
+    targetPort: 5432

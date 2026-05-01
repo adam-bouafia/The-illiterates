@@ -76,3 +76,51 @@
 .md-typeset details {
   border-color: #948979;
 }
+
+/* Docker deck page */
+.docker-hero {
+  background: linear-gradient(135deg, #1f2f57 0%, #22345f 60%, #182744 100%);
+  border-radius: 1.25rem;
+  color: #fff;
+  padding: 2rem;
+  margin: 1.5rem 0 2rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.18);
+}
+
+.docker-hero p {
+  margin: 0;
+  opacity: 0.88;
+}
+
+.docker-hero .eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  color: #24c3df;
+  margin-bottom: 0.6rem;
+}
+
+.docker-hero h1 {
+  margin: 0.2rem 0 0.6rem;
+  color: #fff;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+}
+
+.docker-hero .subtitle {
+  font-size: 1.05rem;
+  max-width: 62ch;
+}
+
+.deck-slide {
+  display: block;
+  width: 100%;
+  margin: 0.75rem 0 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(36, 195, 223, 0.14);
+  background: #fff;
+}
+
+[data-md-color-scheme="slate"] .deck-slide {
+  background: #111923;
+}
