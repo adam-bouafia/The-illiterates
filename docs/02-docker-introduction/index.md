@@ -1,12 +1,11 @@
 # Docker Introduction
 
-Session 2 | 25 April 2026 | Original deck by Muaad
+Session 2 | 2 May 2026 | Original deck by Muaad
 
 Docker
 From Zero to Dockerfile
 
-This page mirrors the source presentation so the website keeps the same content and visual language. The slide renders below are exported directly from the original PPTX.
-
+ 
 ![Docker title slide](slides/slide-01.png){ .deck-slide }
 
 ## What is Docker?

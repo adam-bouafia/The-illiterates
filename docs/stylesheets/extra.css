@@ -124,3 +124,25 @@
 [data-md-color-scheme="slate"] .deck-slide {
   background: #111923;
 }
+
+/* Reveal.js slide images: responsive and centered */
+.reveal .slides figure {
+  margin: 0;
+}
+
+.reveal .slides img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0.6rem;
+}
+
+/* Screen-reader only text */
+.sr-only {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* added line */
+}
