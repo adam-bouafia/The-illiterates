@@ -1,6 +1,6 @@
 # Docker Introduction
 
-Session 2 | 2 May 2026 | Original deck by Muaad
+Session 2 | 2 May 2026 | Led by Muaad
 
 Docker
 From Zero to Dockerfile
