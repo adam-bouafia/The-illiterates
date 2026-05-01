@@ -79,7 +79,6 @@ nav:
       - "Week 3 - April 11": 01-kubernetes-basics-101/notes/week3.md
   - "Session 2 - Docker Introduction":
     - Overview: 02-docker-introduction/index.md
-    - Slides: 02-docker-introduction/slides/index.md
     - Labs:
       - "Lab 1: Build and Run": 02-docker-introduction/labs/lab-01-build-and-run.md
       - "Lab 2: Dockerfile Anatomy": 02-docker-introduction/labs/lab-02-dockerfile-anatomy.md
