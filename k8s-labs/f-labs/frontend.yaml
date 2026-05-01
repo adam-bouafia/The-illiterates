@@ -1,0 +1,171 @@
+# Frontend ConfigMap - nginx config with reverse proxy to backend
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-nginx-config
+  namespace: guestbook
+data:
+  default.conf: |
+    server {
+        listen 80;
+        server_name _;
+
+        location / {
+            root /usr/share/nginx/html;
+            index index.html;
+        }
+
+        location /api/ {
+            proxy_pass http://backend/;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+    }
+
+---
+# Frontend HTML
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-html
+  namespace: guestbook
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The Illiterates - Guestbook</title>
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { font-family: 'Segoe UI', sans-serif; background: #0f0f23; color: #ccc; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+            .container { max-width: 600px; width: 90%; padding: 2rem; }
+            h1 { color: #00cc00; font-size: 2rem; margin-bottom: 0.5rem; font-family: monospace; }
+            h2 { color: #666; font-size: 1rem; margin-bottom: 2rem; }
+            .card { background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; }
+            .card h3 { color: #00cc00; margin-bottom: 0.5rem; }
+            .status { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+            .badge { background: #162447; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; border: 1px solid #1f4068; }
+            .badge.ok { border-color: #00cc00; }
+            .info { color: #666; font-size: 0.85rem; margin-top: 2rem; text-align: center; }
+            a { color: #00cc00; }
+            #api-status { color: #666; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>> The Illiterates_</h1>
+            <h2>Kubernetes Basics 101 - Guestbook</h2>
+
+            <div class="status">
+                <span class="badge ok">Frontend: Running</span>
+                <span class="badge" id="api-badge">API: Checking...</span>
+                <span class="badge ok">K8s: Connected</span>
+            </div>
+
+            <div class="card">
+                <h3>Welcome!</h3>
+                <p>If you can see this page, you have successfully deployed a multi-tier application on Kubernetes.</p>
+            </div>
+
+            <div class="card">
+                <h3>Architecture</h3>
+                <p>Browser → Ingress → Frontend (nginx) → Backend API → PostgreSQL</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #666;">
+                    All components are running as separate pods with proper Services, ConfigMaps, Secrets, and PersistentVolumes.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>API Response</h3>
+                <pre id="api-status">Loading...</pre>
+            </div>
+
+            <p class="info">
+                Workshop: 29 March 2026 | Led by Adam Bouafia<br>
+                <a href="https://github.com/adam-bouafia">github.com/adam-bouafia</a>
+            </p>
+        </div>
+
+        <script>
+            fetch('/api/')
+                .then(r => r.text())
+                .then(data => {
+                    document.getElementById('api-status').textContent = 'Backend connected! Response received.';
+                    document.getElementById('api-badge').classList.add('ok');
+                    document.getElementById('api-badge').textContent = 'API: Connected';
+                })
+                .catch(err => {
+                    document.getElementById('api-status').textContent = 'Error: ' + err.message;
+                    document.getElementById('api-badge').textContent = 'API: Error';
+                });
+        </script>
+    </body>
+    </html>
+
+---
+# Frontend Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: guestbook
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+      tier: web
+  template:
+    metadata:
+      labels:
+        app: frontend
+        tier: web
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d
+        - name: html
+          mountPath: /usr/share/nginx/html
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "32Mi"
+          limits:
+            cpu: "100m"
+            memory: "64Mi"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 5
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: frontend-nginx-config
+      - name: html
+        configMap:
+          name: frontend-html
+
+---
+# Frontend Service (NodePort for easy access)
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: guestbook
+spec:
+  type: NodePort
+  selector:
+    app: frontend
+    tier: web
+  ports:
+  - port: 80
+    targetPort: 80
