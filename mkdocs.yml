@@ -87,5 +87,4 @@ nav:
     - Resources: 02-docker-introduction/resources.md
     - Session Notes:
       - "Week 1 - April 25": 02-docker-introduction/notes/week1.md
-      - "Week 2 - placeholder": 02-docker-introduction/notes/week2.md
-      - "Week 3 - placeholder": 02-docker-introduction/notes/week3.md
+      
