@@ -1,12 +1,17 @@
 # The Illiterates
 
-Weekly study group where we break down real-world tech through theory and hands-on labs.
+My personal learning journal, no fluff, no slides-only sessions. I learn
+by doing, and I write each session down in enough detail that I (or
+anyone starting from zero) can follow it later without having to
+remember what was in my head at the time.
 
-## Sessions
+## Courses
 
-| # | Date | Topic |
-|---|------|-------|
-| 1 | 29.03.2026 | [Kubernetes Basics 101](docs/01-kubernetes-basics-101/index.md) |
+| Course | Started |
+|---|---|
+| [Kubernetes Basics 101](docs/01-kubernetes-basics-101/index.md) | 29.03.2026 |
+| [Docker Introduction](docs/02-docker-introduction/index.md) | 25.04.2026 |
+| [Building a Secure AKS Platform](docs/03-secure-aks-platform/index.md) | 14.11.2026 |
 
 ## Visit [theilliterates](https://the-illiterates.readthedocs.io/) for the latest materials and updates.
 

@@ -39,7 +39,11 @@ plugins:
 markdown_extensions:
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
@@ -53,7 +57,7 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - "Session 1 - Kubernetes Basics 101":
+  - "Kubernetes Basics 101":
     - Overview: 01-kubernetes-basics-101/index.md
     - Theory:
       - "1. What is Kubernetes?": 01-kubernetes-basics-101/theory/01-what-is-kubernetes.md
@@ -77,7 +81,7 @@ nav:
     - Session Notes:
       - "Week 2 - April 4": 01-kubernetes-basics-101/notes/week2.md
       - "Week 3 - April 11": 01-kubernetes-basics-101/notes/week3.md
-  - "Session 2 - Docker Introduction":
+  - "Docker Introduction":
     - Overview: 02-docker-introduction/index.md
     - Labs:
       - "Lab 1: Build and Run": 02-docker-introduction/labs/lab-01-build-and-run.md
@@ -86,4 +90,16 @@ nav:
     - Resources: 02-docker-introduction/resources.md
     - Session Notes:
       - "Week 1 - April 25": 02-docker-introduction/notes/week1.md
-      
+  - "Building a Secure AKS Platform":
+    - Overview: 03-secure-aks-platform/index.md
+    - Theory:
+      - "1. Containers and Images: Naive vs Hardened": 03-secure-aks-platform/theory/01-containers-images.md
+      - "2. Kubernetes on Azure: AKS and Cilium Networking": 03-secure-aks-platform/theory/02-aks-and-networking.md
+      - "3. Infrastructure as Code with Terraform": 03-secure-aks-platform/theory/03-terraform-iac.md
+      - "4. Identity and Secrets: Workload Identity": 03-secure-aks-platform/theory/04-identity-and-secrets.md
+      - "5. Zero-Trust Networking: NetworkPolicy": 03-secure-aks-platform/theory/05-zero-trust-networking.md
+      - "6. Admission Control: Kyverno": 03-secure-aks-platform/theory/06-admission-control.md
+      - "7. Observability: Metrics, Logs, Alerts": 03-secure-aks-platform/theory/07-observability.md
+      - "8. Vulnerability Management": 03-secure-aks-platform/theory/08-vulnerability-management.md
+    - Journal:
+      - "The Build Log (with screenshots)": 03-secure-aks-platform/journal/the-build-log.md
